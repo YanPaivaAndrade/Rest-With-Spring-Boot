@@ -2,8 +2,11 @@ package com.example.restwithspring.dtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.hateoas.RepresentationModel;
 
-public class HeroDto {
+import java.io.Serializable;
+
+public class HeroDto extends RepresentationModel<HeroDto> implements Serializable {
     private int Id;
     @NotBlank
     @NotNull

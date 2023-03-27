@@ -35,7 +35,10 @@ public class HeroService {
         var result = heroRepository.existsByName(name);
         return result;
     }
-
+    public boolean hasHero(int id) {
+        var result = heroRepository.existsById(id);
+        return result;
+    }
     public List<HeroDto> findAll() {
         var entityList = heroRepository
                             .findAll();
