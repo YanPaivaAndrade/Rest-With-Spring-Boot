@@ -2,7 +2,7 @@ package com.example.restwithspring.services;
 
 import com.example.restwithspring.dtos.HeroDto;
 import com.example.restwithspring.model.Hero;
-import com.example.restwithspring.repositories.IHeroRepository;
+import com.example.restwithspring.repositories.HeroRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,10 @@ import java.util.Optional;
 @Service
 public class HeroService {
 
-    private static IHeroRepository heroRepository;
+    private final HeroRepository heroRepository;
 
     @Autowired
-    public HeroService(IHeroRepository heroRepository) {
+    public HeroService(HeroRepository heroRepository) {
         this.heroRepository = heroRepository;
     }
 
@@ -51,14 +51,17 @@ public class HeroService {
     }
 
     public Optional<HeroDto> findById(int id) {
-        var result = heroRepository.findById(id).map(h -> this.HeroToHeroDto(h));
+        var entity = heroRepository.findById(id);
+        var result = entity.map(h -> this.HeroToHeroDto(h));
         return result;
     }
 
     @Transactional
-    public void delete(HeroDto heroDto) {
-        var entity = this.HeroDtoToHero(heroDto);
-        heroRepository.delete(entity);
+    public void delete(int id) {
+        var entity = heroRepository.findById(id);
+        if(entity.isPresent()){
+            heroRepository.delete(entity.get());
+        }
     }
 
     private HeroDto HeroToHeroDto(Hero entity){

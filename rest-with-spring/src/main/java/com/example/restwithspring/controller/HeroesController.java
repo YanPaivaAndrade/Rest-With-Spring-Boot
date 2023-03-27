@@ -47,6 +47,11 @@ public class HeroesController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteHero(@PathVariable(value = "id") int id){
+        var anyHero = heroService.hasHero(id);
+        if(!anyHero){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Heroi não encontrado");
+        }
+        heroService.delete(id);
         return ResponseEntity.status(HttpStatus.OK).body("Heroi deletado");
     }
     @PutMapping("/{id}")
