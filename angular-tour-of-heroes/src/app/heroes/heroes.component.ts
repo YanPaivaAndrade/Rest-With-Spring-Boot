@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HEROES } from '../models/HeroesMock';
 import { Hero } from '../models/HeroModel';
 
 @Component({
@@ -11,4 +12,9 @@ export class HeroesComponent {
     id: 1,
     name: 'Windstorm'
   };
+  public heroes = HEROES;
+  public selectedHero?: Hero;
+  public onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
 }
