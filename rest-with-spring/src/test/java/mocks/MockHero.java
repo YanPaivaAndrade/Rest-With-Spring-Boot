@@ -1,4 +1,4 @@
-package services.mocks;
+package mocks;
 
 import com.example.restwithspring.dtos.HeroDto;
 import com.example.restwithspring.model.Hero;

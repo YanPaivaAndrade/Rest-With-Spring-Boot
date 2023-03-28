@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.BeanUtils;
-import services.mocks.MockHero;
+import mocks.MockHero;
 
 import java.util.ArrayList;
 import java.util.Optional;

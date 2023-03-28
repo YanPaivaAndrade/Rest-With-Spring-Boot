@@ -111,7 +111,7 @@ public class HeroesController {
             description = "the objective of this method is delete a hero",
             tags = {"Hero"},
             responses = {
-                    @ApiResponse(description = "Ok", responseCode = "200", content = @Content),
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
@@ -124,7 +124,7 @@ public class HeroesController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Heroi não encontrado");
         }
         heroService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Heroi deletado");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Heroi deletado");
     }
     @PutMapping(value = "/{id}",
                 consumes = APPLICATION_JSON_VALUE,
