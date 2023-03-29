@@ -21,7 +21,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/hero/v1")
 @Tag(name = "hero", description = "Endpoints for Managing Hero")
 public class HeroesController {
@@ -56,8 +55,7 @@ public class HeroesController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @GetMapping(consumes = APPLICATION_JSON_VALUE,
-                produces = APPLICATION_JSON_VALUE)
+    @GetMapping(produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Get All Heroes",
             description = "the objective of this method is to get all the heroes",
             tags = {"Hero"},
