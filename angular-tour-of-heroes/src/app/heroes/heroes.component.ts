@@ -8,10 +8,7 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit  {
-  public hero: Hero = {
-    id: 1,
-    name: 'Windstorm'
-  };
+ 
   public heroes = new Array();
   public selectedHero?: Hero;
   constructor(private heroService: HeroService) {
@@ -26,7 +23,5 @@ export class HeroesComponent implements OnInit  {
           .getHeroes()
           .subscribe(heroes => this.heroes = heroes);
   }
-  public onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-  }
+ 
 }

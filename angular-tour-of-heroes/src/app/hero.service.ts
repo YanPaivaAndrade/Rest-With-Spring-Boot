@@ -14,15 +14,23 @@ export class HeroService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-    ) { }
-    
+  ) { }
+
   public getHeroes(): Observable<Hero[]> {
-      return this.http.get<Hero[]>(this.heroesApi)
-        .pipe(
-          tap(_ => this.log('fetched heroes')),
-          catchError(this.handleError<Hero[]>('getHeroes', []))
-        );
-    }
+    return this.http.get<Hero[]>(this.heroesApi)
+      .pipe(
+        tap(_ => this.log('fetched heroes')),
+        catchError(this.handleError<Hero[]>('getHeroes', []))
+      );
+  }
+  public getHero(id: number): Observable<Hero> {
+    const url = `${this.heroesApi}/${id}`;
+    return this.http.get<Hero>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Hero>(`getHero id=${id}`))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

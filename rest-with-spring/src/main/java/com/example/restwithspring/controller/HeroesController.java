@@ -78,7 +78,6 @@ public class HeroesController {
     }
 
     @GetMapping(value = "/{id}",
-                consumes = APPLICATION_JSON_VALUE,
                 produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Get one hero",
             description = "the objective of this method is to get a hero",
