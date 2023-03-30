@@ -23,11 +23,28 @@ export class HeroService {
         catchError(this.handleError<Hero[]>('getHeroes', []))
       );
   }
+  
   public getHero(id: number): Observable<Hero> {
     const url = `${this.heroesApi}/${id}`;
     return this.http.get<Hero>(url).pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
       catchError(this.handleError<Hero>(`getHero id=${id}`))
+    );
+  }
+
+  public updateHero(hero: Hero): Observable<any> {
+    const url = `${this.heroesApi}/${hero.id}`;
+    const newName = {name: hero.name};
+    return this.http.put(url, newName, this.httpOptions).pipe(
+      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
+
+  public addHero(hero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.heroesApi, hero, this.httpOptions).pipe(
+      tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+      catchError(this.handleError<Hero>('addHero'))
     );
   }
 
